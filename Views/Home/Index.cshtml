@@ -1,0 +1,97 @@
+﻿@model List<Tuple<string, string>>
+
+@{
+    ViewData["Title"] = "YouTube Video List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <label for="playlistId">Enter Playlist ID:</label>
+    <input type="text" id="playlistId" />
+    <button onclick="getVideos()">Get Videos</button>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Embed Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <div class="copy-container">
+                            <span class="embed-link" id="embedLink_1_@i">@Model[i].Item1</span>
+                            <button class="copy-icon" onclick="copyToClipboard('embedLink_1_@i')">Copy</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="copy-container">
+                            <span class="embed-link" id="embedLink_2_@i">@Model[i].Item2</span>
+                            <button class="copy-icon" onclick="copyToClipboard('embedLink_2_@i')">Copy</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No videos found.</p>
+}
+
+@section scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <style>
+        .copy-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .custom-toast {
+            position: absolute;
+            top: 90px;
+            right: 20px;
+            height: fit-content;
+        }
+    </style>
+    <script>
+        function getVideos() {
+            var playlistId = document.getElementById("playlistId").value;
+            // You can perform additional validation on playlistId if needed
+
+            // Redirect to the Index action with the playlistId parameter
+            window.location.href = "/Home/Index?playlistId=" + playlistId;
+        }
+
+        function copyToClipboard(elementId) {
+            console.log(elementId)
+            var copyText = document.getElementById(elementId);
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent; // Use textContent instead of innerText
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            // Show a toast notification
+            Toastify({
+                text: textArea.value + "\nCopied to clipboard!",
+                duration: 3000,
+                gravity: "bottom",
+                // position: 'center',
+                backgroundColor: "green",
+                className: "custom-toast",
+            }).showToast();
+        }
+    </script>
+}

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "QfuSZhi22FpE4C6o8/2dL06y9inKxVG/wSvb1ttud+DEElt+OK7BsvVYue6J7AWHxTO6IkI4yDqmGugw4AcfRA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ICH-PC\\source\\repos\\Youtube.MVC\\Youtube.MVC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\google.apis\\1.67.0\\google.apis.1.67.0.nupkg.sha512",
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\google.apis.auth\\1.67.0\\google.apis.auth.1.67.0.nupkg.sha512",
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\google.apis.core\\1.67.0\\google.apis.core.1.67.0.nupkg.sha512",
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\google.apis.youtube.v3\\1.67.0.3330\\google.apis.youtube.v3.1.67.0.3330.nupkg.sha512",
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",
+    "C:\\Users\\ICH-PC\\.nuget\\packages\\system.management\\7.0.2\\system.management.7.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
