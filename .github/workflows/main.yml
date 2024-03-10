@@ -32,4 +32,4 @@ jobs:
           server-computer-name: https://win5187.site4now.net:8172
           server-username: yanaye3635-001
           server-password: Phuoc123@
-          source-path: './publish'
+          source-path: '\artifacts\publish\net5.0\release\'
