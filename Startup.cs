@@ -19,10 +19,13 @@ namespace Youtube.MVC
         {
             services.AddControllersWithViews();
 
+            //services.AddMvc()
+            //        .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddCors(options =>
             {
                 options.AddPolicy("Cors",
-                    builder => builder.WithOrigins("https://vigek15539-001-site1.ltempurl.com")
+                    builder => builder.WithOrigins("*")
                         .AllowAnyHeader()
                         .AllowAnyMethod());
             });
@@ -46,7 +49,7 @@ namespace Youtube.MVC
 
             app.UseCors("Cors");
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

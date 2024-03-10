@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "YouTube Video List";
+    var playlistTitle = ViewBag.PlaylistTitle;
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -14,9 +15,19 @@
 
 @if (Model != null && Model.Any())
 {
+
+    @if (!string.IsNullOrEmpty(playlistTitle))
+    {
+        <div style="display: flex">
+            <h4 id="playlistTitle">@playlistTitle</h4>
+            <button style="margin-left: 1rem" class="copy-icon" onclick="copyToClipboard('playlistTitle')">Copy</button>
+        </div>
+    }
+
     <table class="table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Embed Link</th>
             </tr>
@@ -25,6 +36,7 @@
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr>
+                    <td>@(i + 1)</td>
                     <td>
                         <div class="copy-container">
                             <span class="embed-link" id="embedLink_1_@i">@Model[i].Item1</span>
@@ -58,9 +70,10 @@ else
         }
 
         .custom-toast {
-            position: absolute;
-            top: 90px;
-            right: 20px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100;
             height: fit-content;
         }
     </style>
@@ -86,7 +99,7 @@ else
             // Show a toast notification
             Toastify({
                 text: textArea.value + "\nCopied to clipboard!",
-                duration: 3000,
+                duration: 1500,
                 gravity: "bottom",
                 // position: 'center',
                 backgroundColor: "green",
