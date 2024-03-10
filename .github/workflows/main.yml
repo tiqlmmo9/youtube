@@ -1,6 +1,12 @@
 name: Build, publish and deploy project to Simply
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOTNET_VERSION: 5.0
 
 jobs:
   build_and_deploy:
@@ -8,22 +14,22 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Setup .NET Core
+      - name: Setup .NET 5
         uses: actions/setup-dotnet@v4.0.0
         with:
-          dotnet-version: 5.0
+          dotnet-version: ${{ env.DOTNET_VERSION }}
           
       - name: Install dependencies
         run: dotnet restore
         
-      - name: Build
+      - name: Build app
         run: dotnet build --configuration Release --no-restore
-
-      - name: Publish
-        run: dotnet publish --configuration Release --output ./publish --no-build
-        
+                
       - name: Test with .NET
         run: dotnet test
+
+      - name: Publish app
+        run: dotnet publish --configuration Release --output ./publish --no-build
 
       - name: Deploy to Simply        
         uses: talunzhang/SmarterASP.NET-web-deploy@v1.0.1
