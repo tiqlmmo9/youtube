@@ -29,7 +29,6 @@ namespace Youtube.MVC.Controllers
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             string apiKey = "AIzaSyA4HGKpLTz76bL-xaXKCzbu9DGI1YtSJVA";
-            //string playlistId = "PLQac44oRjtcVr2gpx7JFeJ_SHShYuGFpU";
 
             if (string.IsNullOrWhiteSpace(playlistId))
             {
@@ -42,6 +41,19 @@ namespace Youtube.MVC.Controllers
                 ApiKey = apiKey,
                 ApplicationName = "YouTubePlaylistReader"
             });
+
+            var playlistRequest = youtubeService.Playlists.List("snippet");
+            playlistRequest.Id = playlistId;
+            var playlistResponse = playlistRequest.Execute();
+
+            if (playlistResponse.Items.Count > 0)
+            {
+                ViewBag.PlaylistTitle = playlistResponse.Items[0].Snippet.Title;
+            }
+            else
+            {
+                ViewBag.PlaylistTitle = "Unknown Playlist";
+            }
 
             var request = youtubeService.PlaylistItems.List("snippet");
             request.PlaylistId = playlistId;
@@ -67,6 +79,7 @@ namespace Youtube.MVC.Controllers
 
             return View(videoInfoList);
         }
+
 
         public IActionResult Privacy()
         {
