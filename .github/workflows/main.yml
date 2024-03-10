@@ -1,35 +1,31 @@
-name: Build, publish, and deploy project to Simply
+name: Build, publish and deploy project to Simply
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build_and_deploy:
     runs-on: windows-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v1
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v4.0.0
         with:
-          dotnet-version: 5.0
-
+          dotnet-version: 8.0
+          
       - name: Install dependencies
         run: dotnet restore
-
+        
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish --configuration Release --no-build --output ./publish
-
+        run: dotnet publish
+        
       - name: Test with .NET
         run: dotnet test
 
-      - name: Deploy to Simply
+      - name: Deploy to Simply        
         uses: talunzhang/SmarterASP.NET-web-deploy@v1.0.1
         with:
           website-name: yanaye3635-001-site1
