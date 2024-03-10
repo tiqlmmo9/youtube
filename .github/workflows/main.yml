@@ -11,7 +11,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4.0.0
         with:
-          dotnet-version: 8.0
+          dotnet-version: 5.0
           
       - name: Install dependencies
         run: dotnet restore
@@ -20,7 +20,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish
+        run: dotnet publish --configuration Release --output ./publish --no-build
         
       - name: Test with .NET
         run: dotnet test
@@ -32,3 +32,4 @@ jobs:
           server-computer-name: https://win5187.site4now.net:8172
           server-username: yanaye3635-001
           server-password: Phuoc123@
+          source-path: './publish/'
